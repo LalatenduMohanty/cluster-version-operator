@@ -1,0 +1,18 @@
+{
+  "edges": [
+    [
+      0,
+      1
+    ]
+  ],
+  "nodes": [
+    {
+      "payload": "registry.build01.ci.openshift.org/ci-ln-k6t8nyb/release@sha256:ab7bf0469aa054834c7c43a717a53b4903ee854dc4894bf92c816c28d2d1c05a",
+      "version": "4.10.0-0.nightly-2021-11-09-181140"
+    },
+    {
+      "payload": "quay.io/openshift-release-dev/ocp-release@sha256:e867135cd5a09192635b46ccab6ca7543e642378dc72fa22ea54961b05e322f2",
+      "version": "4.10.0-testing"
+    }
+  ]
+}
