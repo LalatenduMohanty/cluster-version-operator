@@ -666,7 +666,7 @@ func (optr *Operator) upgradeableSync(ctx context.Context, key string) error {
 		return nil
 	}
 
-	return optr.syncUpgradeable()
+	return optr.syncUpgradeable(config)
 }
 
 // isOlderThanLastUpdate returns true if the cluster version is older than

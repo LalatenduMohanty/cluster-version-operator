@@ -35,12 +35,15 @@ var adminAckGateRegexp = regexp.MustCompile(adminAckGateFmt)
 
 // syncUpgradeable. The status is only checked if it has been more than
 // the minimumUpdateCheckInterval since the last check.
-func (optr *Operator) syncUpgradeable() error {
+func (optr *Operator) syncUpgradeable(config *configv1.ClusterVersion) error {
 	// updates are only checked at most once per minimumUpdateCheckInterval or if the generation changes
 	u := optr.getUpgradeable()
 	if u != nil && u.RecentlyChanged(optr.minimumUpdateCheckInterval) {
-		klog.V(2).Infof("Upgradeable conditions were recently checked, will try later.")
-		return nil
+		cond := resourcemerge.FindOperatorStatusCondition(config.Status.Conditions, DesiredReleaseAccepted)
+		if cond.Reason == "PreconditionChecks" && cond.Status == configv1.ConditionTrue {
+			klog.V(2).Infof("Upgradeable conditions were recently checked, will try later.")
+			return nil
+		}
 	}
 	optr.setUpgradeableConditions()
 
